@@ -1,0 +1,30 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ToDoList">
+<head>
+    <title>To-Do List</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/angular/angular.js"></script>
+    <script src="~/ngApp/app.js"></script>
+</head>
+<body ng-cloak ng-controller="HomeController as controller">
+    <input ng-model="newItem" />
+    <button ng-click="controller.addItem(newItem); newItem = null">Add</button>
+
+    <ul>
+        <li ng-repeat="item in controller.listItems track by $index">
+            <span ng-if="!controller.edit[$index]">
+                {{item}}
+                <button ng-click="controller.edit[$index] = true">Edit</button>
+            </span>
+            <span ng-if="controller.edit[$index]">
+                <input ng-model="controller.listItems[$index]" />
+                <button ng-click="controller.edit[$index] = false">Submit</button>
+            </span>
+
+            <button ng-click="controller.deleteItem(item)">Delete</button>
+        </li>
+    </ul>
+
+    @*<input ng-model="replaceItem" ng-show="controller.edit" />
+    <button ng-show="controller.edit" ng-click="controller.editItem(controller.editAnItem, replaceItem); replaceItem = null">Submit</button>*@
+</body>
+</html>
